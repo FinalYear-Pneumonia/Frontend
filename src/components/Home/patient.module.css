@@ -1,0 +1,75 @@
+.note {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 20px;
+  float: left;
+}
+
+.note h1 {
+  font-size: 1.1em;
+  margin-bottom: 6px;
+}
+
+.note p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.btn1 {
+  position: relative;
+  float: right;
+  margin-right: 5px;
+  background-color: #3668ce;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  width: 76px;
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn2 {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  background-color: #29b3cf;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  width: 56px;
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn3 {
+  position: relative;
+  float: right;
+  margin-right: 10px;
+  background-color: #ff4136; /* Red color for the Delete button */
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  width: 76px;
+  height: 36px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn1 a,
+.btn2 a,
+.btn3 a {
+  text-decoration: none;
+}

@@ -1,0 +1,187 @@
+
+
+.home_background{
+    width: 100%;
+    /* height: 100vh; */
+    /* filter: brightness(50%); */
+    background-image: url("../../Assets/myDoctor3.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    /* background-blend-mode: darken; */
+    padding: 1.7rem 0 2rem;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.predictionResult {
+  margin-top: 20px;
+  border: 1px solid #050716;
+  padding: 10px;
+}
+.uploadedImage {
+  max-width: 200px; /* Adjust the value as needed to make the image small */
+  max-height: 200px; /* Adjust the value as needed to maintain aspect ratio */
+  margin-top: 10px; /* Add some space between the button and the image */
+}
+
+.home_container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 81rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10rem;
+    /* z-index: 10; */
+}
+
+.big_title {
+    font-size: 1.4rem;
+    color: #312f3a;
+    text-transform: capitalize;
+    line-height: 1.4;
+    padding-top: 5rem;
+  }
+
+  .text {
+    /* color: #919191; */
+    color: rgb(215, 209, 209);
+    font-size: 1.1rem;
+    margin: 1.9rem 0 2.5rem;
+    max-width: 600px;
+    line-height: 2.3;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.9rem 1.9rem;
+    color: #fff !important;
+    background-color: #3b69c5;
+    border-radius: 16px;
+    text-transform: capitalize;
+    transition: 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* #1c52bf; #64bcf4;(light blue)*/
+.btn:hover{
+    background-color: #113a8d;
+    transform: scale(1);
+}
+.x_btn{
+    padding-top: 50px;
+}
+.myForm{
+    padding-top: 50px;
+}
+
+form textarea {
+    width: auto;
+    border: none;
+    padding: 4px;
+    outline: none;
+    font-size: 1.2em;
+    /* font-family: inherit; */
+    resize: none;
+  }
+
+.home_nav{
+    /* display: flex; */
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between;
+    min-height: 90px;
+    position: absolute;
+    max-width: 81rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 3rem;
+    z-index: 10; */
+}
+
+.container_fluid{
+    /* flex-direction: column; */
+    /* padding: left 205%;; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 90px;
+    position: relative;
+    max-width: 81rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 3rem;
+    z-index: 10;
+  }
+  .nav_title {
+    font-family: 'itim';
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+  }
+  .navbar_links_container a {
+    margin-left: 2rem;
+    display: inline-block;
+    text-decoration: none;
+    /* color: #aaa; */
+    color:  rgb(215, 209, 209);
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: 0.3s
+  }
+  .navbar_links_container a:hover{
+    color: #5bacdf;
+  }
+  .navbar_menu_container {
+    display: none;
+    color: #000000;
+    cursor: pointer;
+  }
+
+  .upload_name{
+    background-color: #fff;
+  }
+
+  .offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  /* padding: 0.5rem;
+  margin-bottom: 0.5rem; */
+}
+
+.both{
+  padding-top: 3%;
+}
+  
+
+
+
+  @media screen and (max-width: 1050px){
+    .home_container{
+      padding: 0 3rem;
+    }
+    .home_background{
+        background-size: none;
+    }
+    .navbar_links_container {
+        display: none;
+      }
+    .navbar_menu_container {
+        display: flex;
+    }
+    }

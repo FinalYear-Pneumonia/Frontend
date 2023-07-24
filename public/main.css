@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: "itim", sans-serif !important; */
+  }
+
+
+html {
+    font-family: 'Nunito', sans-serif;
+    /* font-size: 19px;
+    color: #fff; */
+}
+
+/* body {  
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: #f6f6f6;
+    
+    min-height: 100vh;
+} */
+  

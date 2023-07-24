@@ -1,0 +1,30 @@
+.report_container{
+    /* padding: 2rem 3rem; */
+    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)), url("../../Assets/myDoctor4.jpeg");
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    /* padding: 1.7rem 2rem 2rem; */
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.report_title{
+    font-size: 1.4rem;
+    color: #fff;
+    text-transform: capitalize;
+    line-height: 1.4;
+    /* padding-top: 30%; */
+    padding: 20px;
+    width: 500px;
+    border-radius: 18px;
+    margin:20px;
+    background-color: rgba(0,0,0,0.4);
+}

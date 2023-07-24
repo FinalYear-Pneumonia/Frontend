@@ -1,0 +1,50 @@
+.myhome_background{
+    width: 100%;
+    /* height: 100vh; */
+    /* filter: brightness(50%); */
+    background-image: url("../../Assets/myDoctor.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    /* background-blend-mode: darken; */
+    padding: 1.7rem 0 2rem;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.top_btn, .bottom_btn{
+    /* font-family: 'itim'; */
+    font-size: 1.2rem;
+    /* font-weight: bold; */
+    /* color: black; */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 5px solid #1c52bf;
+    border-radius:18px;
+    max-width: 450px;
+    padding: 15px;
+    margin: 15px;
+    
+}
+
+.top_btn a, .bottom_btn a {
+    color: black;
+    text-decoration: none;
+}
+
+.top_btn img, .bottom_btn img{
+    width: 200px;
+    padding: 12px;
+    /* margin-right: 0.6rem;
+    margin-top: -0.3rem; */
+  }
+
+.myhome_wrapper{
+    padding: 135px;
+    /* padding-top: 155px; */
+}

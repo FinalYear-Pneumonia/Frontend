@@ -1,0 +1,17 @@
+.patient_container{
+    padding: 2rem 3rem;
+    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)), url("../../Assets/myDoctor4.jpeg");
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    /* padding: 1.7rem 2rem 2rem; */
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
