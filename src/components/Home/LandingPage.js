@@ -97,7 +97,7 @@ const LandingPage = () => {
             molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
           </p>
           <div>
-            <a href='#' className={styles.btn}>Get started</a>
+            <a href='/authpage' className={styles.btn}>Get started</a>
           </div>
         </div>
         <div className={styles.right}>

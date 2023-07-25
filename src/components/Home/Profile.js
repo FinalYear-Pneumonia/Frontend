@@ -7,6 +7,7 @@ import axios from '../../api/axios';
 
 const Profile = () => {
   const [image, setImage] = useState();
+  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
 
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
@@ -35,6 +36,26 @@ const Profile = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
+    // Check if the email is in the correct format using a regular expression
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+      setErrMsg('Please enter a valid email address.');
+      return;
+    }
+    const contactPattern = /^\+\d+/;
+    if (!contactPattern.test(contact)) {
+      setErrMsg('Please enter a valid contact number.');
+      return;
+    }
+
+    // Check if the contact number is at least 10 characters long
+    if (contact.length < 10) {
+      setErrMsg('Contact number must be at least 10 characters long.');
+      return;
+    }
+
+    setIsLoading(true)
+
     // Make a PUT request to update the user profile
     const token = localStorage.getItem('token');
     axios.put('http://127.0.0.1:5000/user/user/', {
@@ -49,10 +70,14 @@ const Profile = () => {
     .then(response => {
       // Handle the successful update (if needed)
       console.log('Profile updated successfully:', response.data);
+      setErrMsg('User Updated Successful')
+      setIsLoading(false)
+      // window.location.reload();
     })
     .catch(error => {
       console.error('Error updating profile:', error);
       setErrMsg('Failed to update profile.');
+      setIsLoading(false)
     });
   };
 
@@ -122,7 +147,8 @@ const Profile = () => {
           value={contact}
         />
 
-        <button type='submit' className={styles.forg_pwd_btn}>Update profile</button>
+        <button type='submit' className={styles.forg_pwd_btn} disabled={isLoading}>{isLoading ? 'Loading...' : 'Update Profile'}
+        </button>
       </form>
       <p><br />
                 <span className='line'>

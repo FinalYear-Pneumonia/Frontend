@@ -234,6 +234,24 @@ body, input{
     padding: 0.5rem;
     margin-bottom: 0.5rem;
 }
+.loerrmsg{
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: right;
+    margin-left: 30px;
+}
+.losuccmsg{
+    background-color: rgb(21, 238, 104);
+    color: rgb(34, 156, 178);
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: right;
+    margin-left: 30px;
+}
 .succmsg {
     background-color: rgb(21, 238, 104);
     color: rgb(34, 156, 178);

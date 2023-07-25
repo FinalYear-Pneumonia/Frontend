@@ -16,6 +16,13 @@ const ForgetPwd = () => {
         const form = e.target;
         const email = form.email.value;
 
+        // Check if the email is in the correct format using a regular expression
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+        setErrMsg('Please enter a valid email address.');
+        return;
+        }
+
         try {
             const response = await axios.post(FORGPWD_URL, { email });
             console.log(response.data);

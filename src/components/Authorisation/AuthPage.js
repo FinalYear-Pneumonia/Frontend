@@ -10,7 +10,10 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [LsuccessMessage, setLSuccessMessage] = useState('');
+  const [LerrorMessage, setLErrorMessage] = useState('');
   const [token, setToken] = useState('');
+  
 
   function changeValid() {
     setValid(!valid);
@@ -23,7 +26,33 @@ const AuthPage = () => {
     const email = form.email.value;
     const contact = form.contact.value;
     const password = form.password.value;
-    const confirmPassword = form['confirm-password'].value;
+    const confirmPassword = form.confirm_password.value;
+
+    // Check if the email is in the correct format using a regular expression
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const contactPattern = /^[0-9]{10,}$/;
+    if (!contactPattern.test(contact)) {
+      setErrorMessage('Please enter a valid contact number.');
+      return;
+    }
+    if (!emailPattern.test(email)) {
+      setErrorMessage('Please enter a valid email address.');
+      return;
+    }
+
+    // Check if the contact number is at least 10 characters long
+    if (contact.length < 10) {
+      setErrorMessage('Contact number must be at least 10 characters long.');
+      return;
+    }
+    if (password.length < 8) {
+      setErrorMessage('Password must be at least 8 characters long.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return;
+    }
 
     try {
       const response = await axios.post('http://127.0.0.1:5000/user/signup', {
@@ -35,15 +64,21 @@ const AuthPage = () => {
       });
       // Handle successful signup response
       console.log(response.data); // Update or redirect as needed
-      setSuccessMessage('Successfully Completed!'); // Set the success message
+      setSuccessMessage('Please Check Email(SPAM) for Activation Link!'); // Set the success message
       setErrorMessage(''); // Clear any previous error message
-      navigate('/authpage');
     } catch (error) {
       // Handle signup error
-      console.log(error.response.data.message);
-      setErrorMessage('Operation failed. Please try again.'); // Set the error message
+      if (error.response && error.response.data && error.response.data.message) {
+        const message = error.response.data.message;
+        console.log(message);
+        setErrorMessage(`User with email '${email}' already exist`)
+      } else {
+        console.error('Unexpected error:', error);
+        setErrorMessage('Operation failed. Please try again.');
+      }
       setSuccessMessage(''); // Clear any previous success message
     }
+    
   };
 
   const handleSignInSubmit = async (e) => {
@@ -59,17 +94,22 @@ const AuthPage = () => {
       });
       // Handle successful login response
       console.log(response.data); // Update or redirect as needed
-      setSuccessMessage('Successfully Completed!'); // Set the success message
-      setErrorMessage(''); // Clear any previous error message
+      setLSuccessMessage('Successfully Completed!'); // Set the success message
+      setLErrorMessage(''); // Clear any previous error message
       setToken(response.data.access_token);
       localStorage.setItem('token', token);
       navigate('/home');
     } catch (error) {
       // Handle login error
-      console.log(error.response.data.message);
-      setErrorMessage('Operation failed. Please try again.'); // Set the error message
-      setSuccessMessage(''); // Clear any previous success message
-    
+      if (error.response && error.response.data && error.response.data.message) {
+        const message = error.response.data.message;
+        console.log(message);
+        setLErrorMessage(`User Email or Password Incorrect`)
+      } else {
+        console.error('Unexpected error:', error);
+        setLErrorMessage('Operation failed. Please try again.');
+      }
+      setLSuccessMessage(''); // Clear any previous success message
     }
   };
 
@@ -83,6 +123,8 @@ const AuthPage = () => {
     <div className={`${styles.container_auth} ${valid ? styles.sign_up_mode : ''}`}>
       {successMessage && <p className={styles.succmsg} aria-live="assertive">{successMessage}</p>}
       {errorMessage && <p className={styles.errmsg} aria-live="assertive">{errorMessage}</p>}
+      {LsuccessMessage && <p className={styles.losuccmsg} aria-live="assertive">{LsuccessMessage}</p>}
+      {LerrorMessage && <p className={styles.loerrmsg} aria-live="assertive">{LerrorMessage}</p>}
       <div class={styles.forms_container}>
         <div class={styles.signin_signup}>
           <form onSubmit={handleSignInSubmit} class={`${styles.form_auth} ${styles.sign_in_form}`}>

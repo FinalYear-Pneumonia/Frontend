@@ -1,6 +1,3 @@
-
-
-
 import React from 'react';
 import Register from './Authorisation/Register';
 import AuthPage from './Authorisation/AuthPage';
@@ -11,6 +8,7 @@ import ForgetPwd from './Authorisation/ForgetPwd';
 import { Routes, Route } from 'react-router-dom';
 import LandingPage from './Home/LandingPage';
 import Layout from './Layout';
+import { isTokenValid } from './Authorisation/Authservice';
 import HomeLayout from './HomeLayout';
 import VerifyCode from './Authorisation/VerifyCode';
 import ResetPwd from './Authorisation/ResetPwd';
@@ -25,6 +23,7 @@ import Diagnose from './Home/Diagnose';
 import Home from './Home/Home';
 // import styles from './Authorisation/styles.module.css';
 
+
 function App() {
 
   return (
@@ -33,7 +32,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* <Route path="/" element={<Home />} /> */}
           <Route path='/' element = {<LandingPage/>} />
-          <Route path="login" element={<Login />} />
           <Route path="forgetpwd" element={<ForgetPwd />} />
           <Route path="/verifycode" exact element={<VerifyCode />} />
           <Route path="/resetpwd" exact element={<ResetPwd />} />
