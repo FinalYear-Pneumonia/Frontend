@@ -22,6 +22,29 @@
   /* background-image: ; */
 }
 
+.ForgetApp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 1rem 0.5rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)), url("../../Assets/myDoctor2.jpeg");
+  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* padding-top: 7rem; */
+    /* background-color: #5b91b1; */
+    /* background-image: ; */
+  }
+
+
 .forg_pwd_section {
     font-size: 19px;
     color: #fff;

@@ -5,10 +5,12 @@ import Navbar from './Home/Navbar';
 
 const ProfileLayout = () => {
     return (
-
-        <div className={styles.AuthApp}>
-            <Outlet />
-        </div>
+        <main>
+            <div><Navbar /></div>
+            <div className={styles.AuthApp}>
+                <Outlet />
+            </div>
+        </main>
     )
 }
 

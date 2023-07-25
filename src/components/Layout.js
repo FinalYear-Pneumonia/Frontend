@@ -6,8 +6,8 @@ import Navbar from './Home/Navbar';
 const Layout = () => {
   return (
     <main >
-      <div><Navbar/></div>
-      <div className={styles.AuthApp}>
+      {/* <div><Navbar/></div> */}
+      <div className={styles.ForgetApp}>
         <Outlet />
       </div>
 

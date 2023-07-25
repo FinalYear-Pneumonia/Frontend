@@ -27,40 +27,39 @@ import Home from './Home/Home';
 
 function App() {
 
+  const ProtectedRoutes = ({ children }) => {
+    const token = localStorage.getItem("accessToken")
+    if (token) {
+      return children;
+    }
+    return <Navigate to="/auth" />
+  }
+
   return (
     <main >
       <Routes>
+
         <Route path="/" element={<Layout />}>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path='/' element = {<LandingPage/>} />
-          <Route path="login" element={<Login />} />
-          <Route path="forgetpwd" element={<ForgetPwd />} />
-          <Route path="/verifycode" exact element={<VerifyCode />} />
-          <Route path="/resetpwd" exact element={<ResetPwd />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/patient" element={<PatientForm />} />
-          <Route path="/view" element={<ViewReports />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="forget" element={<ForgetPwd />} />
+          <Route path="verifycode" element={<VerifyCode />} />
+          <Route path="resetpwd" element={<ResetPwd />} />
         </Route>
 
+        <Route index element={<LandingPage />} />
+        <Route path="authpage" element={<AuthPage />} />
+        <Route path="home" element={<Home />} />
+        <Route path="individual" element={<GetAllPatients />} />
+        <Route path="about" element={<About />} />
+        <Route path="report" element={<Report />} />
 
-        {/* <Route path="/profile" element={<ProfileLayout />}>
+        <Route path="/" element={<ProfileLayout />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="patient" element={<PatientForm />} />
+          <Route path="view" element={<ViewReports />} />
+        </Route>
 
-        </Route> */}
+        <Route path="*" element={<NotFound />} />
 
-        <Route path="/home" element={<Home />} />
-        <Route path="/individual" exact element={<GetAllPatients />} />
-        <Route path="/report" exact element={<Report />} />
-        <Route path="/authpage" exact element={<AuthPage />} />
-        <Route path="/diagnose" exact element={<Diagnose />} />
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/about" element={<About />} />
-
-
-        {/* <Route path="/home" element={<HomeLayout />}>
-          <Route path="/home" element={<LandingPage />} />
-          <Route path="landing" element={<Home />} />
-        </Route > */}
       </Routes>
     </main>
   );
