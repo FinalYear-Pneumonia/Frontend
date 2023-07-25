@@ -143,12 +143,14 @@ const Diagnose = () => {
               </div>
             </section>
             {/* Display the image prediction result */}
-            {predictionResult && (
-              <div className={styles.predictionResult}>
-                <h2>Image Prediction Result:</h2>
-                <p>Pneumonia Status: {pneumoniaStatus(predictionResult.has_pneumonia)}</p>
-              </div>
-            )}
+            <div className={styles.pred_result}>
+              {predictionResult && (
+                <div className={styles.predictionResult}>
+                  <h2>Image Prediction Result:</h2>
+                  <p>Pneumonia Status: {pneumoniaStatus(predictionResult.has_pneumonia)}</p>
+                </div>
+              )}
+            </div>
           </div>
           <div className={styles.right}></div>
         </div>

@@ -12,14 +12,18 @@ const Home = () => {
             </div>
             <section className={styles.myhome_background}>
                 <div className={styles.myhome_wrapper}>
-                    <div className={styles.top_btn}>
-                        <h1><a href='./patient'>Register Patient</a></h1>
-                        <img src={top} />
-                    </div>
+                    <a href='./patient'>
+                        <div className={styles.top_btn}>
+                            <h1>Register Patient</h1>
+                            <img src={top} />
+                        </div>
+                    </a>
+                    <a href='./individual'>
                     <div className={styles.bottom_btn}>
-                        <h1><a href='./individual'>Get All Patient</a></h1>
+                        <h1>Get All Patient</h1>
                         <img src={bottom} />
                     </div>
+                    </a>
                 </div>
             </section>
         </main>
