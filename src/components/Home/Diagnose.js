@@ -1,20 +1,34 @@
-// Diagnose.js
-
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Navbar from './Navbar';
 import styles from './diagnose.module.css';
 import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Diagnose = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const errRef = useRef();
 
-  const [symptoms, setSymptoms] = useState("");
-  const [fileName, setFileName] = useState("");
-  const [errMsg, setErrMsg] = useState(false);
+  const [symptoms, setSymptoms] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const [imageFile, setImageFile] = useState(null); // State to hold the uploaded image file
   const [imageUrl, setImageUrl] = useState(null); // State to hold the URL of the uploaded image
   const [isLoading, setIsLoading] = useState(false);
   const [predictionResult, setPredictionResult] = useState(null); // State to hold the image prediction result
+
+  useEffect(() => {
+    const id = localStorage.getItem('selectedPatientId');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
+    if (!token ) {
+      navigate('/authpage');
+    }
+    else if (!id) {
+      navigate('/home');
+    }
+  }, [navigate]); // Add navigate to the dependency array
 
   function upload(e) {
     setFileName(e.target.files[0].name);
@@ -27,7 +41,7 @@ const Diagnose = () => {
 
     const formdata = new FormData();
     formdata.append('image', imageFile); // Use the imageFile state for the formdata
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
     const id = localStorage.getItem('selectedPatientId');
 
     try {
@@ -40,8 +54,6 @@ const Diagnose = () => {
       // Assuming the response data is an object with prediction and has_pneumonia properties
       setPredictionResult(response.data);
       setIsLoading(false); // Set loading state to false after the API call is complete
-      // setSuccess(true);
-      //clear input fields
     } catch (error) {
       if (!error.response) {
         setErrMsg('No Server Response');
@@ -53,13 +65,15 @@ const Diagnose = () => {
     }
   }
 
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true); // Set loading state to true before making the API call
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
     const id = localStorage.getItem('selectedPatientId');
-    const form = e.target;
 
     try {
       const response = await axios.post(
@@ -73,9 +87,8 @@ const Diagnose = () => {
         }
       );
       console.log(response.data);
+      setPredictionResult(response.data); // Assuming the response data is an object with prediction and has_pneumonia properties
       setIsLoading(false); // Set loading state to false after the API call is complete
-      // setSuccess(true);
-      //clear input fields
     } catch (error) {
       if (!error.response) {
         setErrMsg('No Server Response');
@@ -142,12 +155,16 @@ const Diagnose = () => {
                 </form>
               </div>
             </section>
-            {/* Display the image prediction result */}
+            
+            {/* Display the prediction result */}
             <div className={styles.pred_result}>
               {predictionResult && (
                 <div className={styles.predictionResult}>
-                  <h2>Image Prediction Result:</h2>
-                  <p>Pneumonia Status: {pneumoniaStatus(predictionResult.has_pneumonia)}</p>
+                  <h2>Prediction Result:</h2>
+                  <p>Patient Name: {predictionResult.patient_name}</p>
+                <p>Prediction Type: {predictionResult.prediction_type}</p>
+                <p>Prediction: {predictionResult.prediction}%</p>
+                <p>Pneumonia Status: {pneumoniaStatus(predictionResult.has_pneumonia)}</p>
                 </div>
               )}
             </div>

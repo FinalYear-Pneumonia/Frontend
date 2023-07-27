@@ -5,7 +5,7 @@ import AuthPage from './Authorisation/AuthPage';
 import Login from './Authorisation/Login';
 import NotFound from './Authorisation/NotFound';
 import ForgetPwd from './Authorisation/ForgetPwd';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './Home/LandingPage';
 import Layout from './Layout';
 import { isTokenValid } from './Authorisation/Authservice';
@@ -20,19 +20,13 @@ import GetAllPatients from './Home/GetAllPatients';
 import ViewReports from './Home/ViewReports';
 import Report from './Home/Report';
 import Diagnose from './Home/Diagnose';
+import PredictImageText from './Home/PredictImageText';
 import Home from './Home/Home';
+import UpdatePwd from './Authorisation/UpdatePwd';
 // import styles from './Authorisation/styles.module.css';
 
 
 function App() {
-
-  const ProtectedRoutes = ({ children }) => {
-    const token = localStorage.getItem("accessToken")
-    if (token) {
-      return children;
-    }
-    return <Navigate to="/auth" />
-  }
 
   return (
     <main >
@@ -42,6 +36,7 @@ function App() {
           <Route path="forget" element={<ForgetPwd />} />
           <Route path="verifycode" element={<VerifyCode />} />
           <Route path="resetpwd" element={<ResetPwd />} />
+          <Route path="updatepwd" element={<UpdatePwd />} />
         </Route>
 
         <Route index element={<LandingPage />} />
@@ -50,6 +45,9 @@ function App() {
         <Route path="individual" element={<GetAllPatients />} />
         <Route path="about" element={<About />} />
         <Route path="report" element={<Report />} />
+        <Route path="diagnose" element={<Diagnose />} />
+        <Route path="predict" element={<PredictImageText />} />
+        
 
         <Route path="/" element={<ProfileLayout />}>
           <Route path="profile" element={<Profile />} />

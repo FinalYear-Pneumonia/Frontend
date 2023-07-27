@@ -1,5 +1,5 @@
 // authService.js
-const TOKEN_KEY = 'token';
+const TOKEN_KEY = 'userLoggedInTokenKEY';
 
 export const setAuthToken = (token) => {
   localStorage.setItem(TOKEN_KEY, token);

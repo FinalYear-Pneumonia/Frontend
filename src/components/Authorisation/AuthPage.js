@@ -97,7 +97,7 @@ const AuthPage = () => {
       setLSuccessMessage('Successfully Completed!'); // Set the success message
       setLErrorMessage(''); // Clear any previous error message
       setToken(response.data.access_token);
-      localStorage.setItem('token', token);
+      localStorage.setItem('userLoggedInTokenKEY', token);
       navigate('/home');
     } catch (error) {
       // Handle login error
@@ -115,7 +115,7 @@ const AuthPage = () => {
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('token', token);
+      localStorage.setItem('userLoggedInTokenKEY', token);
     }
   }, [token]);
   return (
@@ -138,7 +138,9 @@ const AuthPage = () => {
               <input type="password" placeholder="Password" name='password'/>
             </div>
             <input type="submit" value="Login" class={styles.btn_auth} />
-            
+            <a className={styles.title_auth2} href="/forgetpwd">
+          Forgot Password?
+        </a>
           </form>
           <form onSubmit={handleSignUpSubmit} class={`${styles.form_auth} ${styles.sign_up_form}`}>
             <h2 class={styles.title_auth}>Sign up</h2>

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import styles from './viewReports.module.css'
-import { useState, useEffect } from 'react';
-
-
+import styles from './viewReports.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const ViewReports = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const [name, setName] = useState('');
   const [sex, setSex] = useState('');
   const [age, setAge] = useState('');
@@ -14,14 +14,20 @@ const ViewReports = () => {
   const [contact, setContact] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
-    useEffect(() => {
-      const token = localStorage.getItem('token');
-      const id= localStorage.getItem('selectedPatientId');
-      axios.get(`http://127.0.0.1:5000/patient/patient/${id}`,
-      {
+  useEffect(() => {
+    const id = localStorage.getItem('selectedPatientId');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
+    if (!token ) {
+      navigate('/authpage');
+    }
+    else if (!id) {
+      navigate('/home');
+    } else {
+      const id = localStorage.getItem('selectedPatientId');
+      axios.get(`http://127.0.0.1:5000/patient/patient/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-        }
+        },
       })
       .then(response => {
         setName(response.data.name);
@@ -33,21 +39,21 @@ const ViewReports = () => {
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
-      setErrMsg('Failed to fetch user data.');
+        setErrMsg('Failed to fetch user data.');
       });
-    }, []);
-     
+    }
+  }, [navigate]); // Add navigate to the dependency array
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
     const id = localStorage.getItem('selectedPatientId');
     axios.put(`http://127.0.0.1:5000/patient/patient/${id}`, {
       name, email, age, sex, patient_id, contact
-    },{
+    }, {
       headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     })
     .then(response => {
       // Handle the successful update (if needed)
@@ -58,8 +64,6 @@ const ViewReports = () => {
       setErrMsg('Failed to update profile.');
     });
   };
-
-
 
   return (
     <section className={styles.forg_pwd_section}>
@@ -128,7 +132,7 @@ const ViewReports = () => {
         <a href='/report'>View Report</a>
       </div>
     </section>
-  )
+  );
 }
 
 export default ViewReports;

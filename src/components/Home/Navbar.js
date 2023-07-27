@@ -20,7 +20,8 @@ const Navbar = () => {
         navigate("/home");
     }
     function logout(){
-        localStorage.removeItem('token');
+        localStorage.removeItem('userLoggedInTokenKEY');
+        navigate("/authpage");
     }
 
     const [openMenu, setOpenMenu] = useState(false);
@@ -55,7 +56,7 @@ const Navbar = () => {
                 <a href="/home"><FontAwesomeIcon icon={faHouse} />Home</a>
                 <a href="/profile"><FontAwesomeIcon icon={faUser} />Profile</a>
                 <a href="/about"><FontAwesomeIcon icon={faAddressBook} />About Us</a>
-                <a href="/" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} />Logout</a>
+                <a href="/authpage" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} />Logout</a>
             </div>
             <div className={styles.navbar_menu_container}>
                 <FontAwesomeIcon icon={faBars} onClick={() => setOpenMenu(true)} />

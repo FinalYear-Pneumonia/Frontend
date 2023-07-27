@@ -3,27 +3,41 @@ import Navbar from './Navbar';
 import ReportForm from './ReportForm';
 import styles from './report.module.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 const Report = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const [patientReports, setPatientReports] = useState([]);
+
+  useEffect(() => {
+    const id = localStorage.getItem('selectedPatientId');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
+    if (!token ) {
+      navigate('/authpage');
+    }
+    else if (!id) {
+      navigate('/home');
+    }
+  }, [navigate]); // Add navigate to the dependency array
 
   // Fetch patient reports from the backend API
   useEffect(() => {
     const id = localStorage.getItem('selectedPatientId');
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
     // Fetch patients data from the backend API
     axios.get(`http://127.0.0.1:5000/patient/patient-reports/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-      }
+      },
     })
-    .then(response => {
-      // Assuming the response data is an array of patient objects
-      setPatientReports(response.data);
-    })
-    .catch(error => {
-      console.error('Error fetching patientReports:', error);
-    });
+      .then(response => {
+        // Assuming the response data is an array of patient objects
+        setPatientReports(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching patientReports:', error);
+      });
   }, []);
 
   // Extract patient information from the first report (assuming patient info is the same for all reports)
@@ -52,6 +66,7 @@ const Report = () => {
           {patientReports.map((rep) => (
             <ReportForm
               key={rep.report_id}
+              report_id={rep.report_id}
               PType={rep.prediction_type}
               Prediction={rep.prediction}
               Pneumonia={pneumoniaStatus(rep.has_pneumonia)}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import styles from './profile.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,17 @@ const PatientForm = () => {
   const [contact, setContact] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false); // New state for loading
+
+  useEffect(() => {
+    const id = localStorage.getItem('selectedPatientId');
+    const token = localStorage.getItem('userLoggedInTokenKEY');
+    if (!token ) {
+      navigate('/authpage');
+    }
+    else if (!id) {
+      navigate('/home');
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +56,7 @@ const PatientForm = () => {
     try {
       setIsLoading(true); // Set loading state to true when form is being submitted
 
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('userLoggedInTokenKEY');
       if (token) {
         const response = await axios.post(
           PatientSignUP_URL,
@@ -63,9 +74,9 @@ const PatientForm = () => {
             },
           }
         );
+
         console.log(response.data);
         navigate('/individual');
-
         setErrMsg('Patient Signed UP successfully!');
       } else {
         setErrMsg('SignUP not working at the moment');
