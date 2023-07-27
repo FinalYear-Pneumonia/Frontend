@@ -36,8 +36,11 @@ const Patient = (props) => {
       <table className={styles.note}>
         <tbody>
           <tr>
-            <td colSpan="3">
-              <h1>{props.patient}</h1>
+            <td className={styles.head} colSpan="3">
+              <a href='/view'>
+                <h1>{props.patient}</h1>
+              </a>
+              
             </td>
           </tr>
           <tr>
@@ -48,7 +51,7 @@ const Patient = (props) => {
             </td>
             <td>
               <button className={styles.btn2} onClick={handleViewClick}>
-                <a href='/view'>View</a>
+                <a href='/report'>Reports</a>
               </button>
             </td>
             <td>

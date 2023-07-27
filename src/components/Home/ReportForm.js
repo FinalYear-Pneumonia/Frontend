@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './reportForm.module.css';
 import axios from 'axios'; // Import axios for API requests
-import { PDFViewer, Document, Page, Text, View, StyleSheet, Image, PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFViewer, Document, Page, Text, View, StyleSheet, Image, PDFDownloadLink, Font } from '@react-pdf/renderer';
 
 const ReportForm = (props) => {
   const [reportData, setReportData] = useState(null);
@@ -48,33 +48,42 @@ const ReportForm = (props) => {
       });
   };
 
+  Font.register({ family: 'Helvetica-Bold', src: 'src\components\Helvetica-Bold-Font.ttf' });
+
   const pdfStyles = StyleSheet.create({
     page: {
       padding: 40,
     },
-    logoContainer: {
-      alignItems: 'center',
-      marginBottom: 20,
-    },
-    logo: {
-      width: 100, // Adjust the width and height according to your logo size
-      height: 100,
-    },
-    reportInfo: {
-      marginBottom: 10,
-    },
     reportTitle: {
+      fontSize: 24,
+      fontFamily: 'Helvetica-Bold',
+      marginBottom: 12,
+      textAlign: 'center',
+    },
+    reportSubtitle: {
       fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 10,
+      fontFamily: 'Helvetica-Bold',
+      marginBottom: 6,
+    },
+    patientInfo: {
+      fontSize: 14,
+      marginBottom: 6,
     },
     sectionHeader: {
       fontSize: 16,
-      fontWeight: 'bold',
+      fontFamily: 'Helvetica-Bold',
       marginBottom: 5,
     },
     sectionContent: {
       marginBottom: 15,
+    },logoContainer: {
+      position: 'relative',
+      top: 30, // Adjust the top position as needed
+      left: 128, // Adjust the left position as needed
+    },
+    logo: {
+      width: 40, // Adjust the width and height according to your logo size
+      height: 30,
     },
     footer: {
       marginTop: 30,
@@ -93,7 +102,7 @@ const ReportForm = (props) => {
     button: {
       padding: '10px 20px',
       fontSize: 16,
-      fontWeight: 'bold',
+      fontFamily: 'Helvetica-Bold',
       borderRadius: 5,
       cursor: 'pointer',
     },
@@ -129,47 +138,43 @@ const ReportForm = (props) => {
               <PDFDownloadLink
                 document={
                   <Document>
-              <Page style={pdfStyles.page}>
-                <View style={pdfStyles.logoContainer}>
-                  <Image src={logoImage} style={pdfStyles.logo} />
-                </View>
+            <Page style={pdfStyles.page}>
+              <View style={pdfStyles.logoContainer}>
+                <Image src={logoImage} style={pdfStyles.logo} />
+              </View>
 
-                <View style={pdfStyles.reportInfo}>
-                  <Text style={pdfStyles.reportTitle}>Medical Report</Text>
-                  <Text>Patient Name: {reportData.patient_name}</Text>
-                  <Text>Patient ID: {reportData.patient_id}</Text>
-                  <Text>Patient Email: {reportData.patient_email}</Text>
-                  <Text>Patient Age: {reportData.patient_age}</Text>
-                  <Text>Patient Sex: {reportData.patient_sex}</Text>
-                  <Text>Patient Contact: {reportData.patient_contact}</Text>
-                </View>
+              <Text style={pdfStyles.reportTitle}>Medical Report</Text>
 
-                <View style={pdfStyles.sectionHeader}>
-                  <Text style={pdfStyles.sectionHeader}>Prediction Details</Text>
-                  <View style={pdfStyles.sectionContent}>
-                    <Text>Prediction Type: {reportData.prediction_type}</Text>
-                    <Text>Prediction: {reportData.prediction}</Text>
-                    <Text>Has Pneumonia: {reportData.has_pneumonia ? 'Yes' : 'No'}</Text>
-                  </View>
-                </View>
+              <Text style={pdfStyles.sectionHeader}>Patient Details</Text>
+              <View style={pdfStyles.sectionContent}>
+              <Text style={pdfStyles.patientInfo}>Patient Name: {reportData.patient_name}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient ID: {reportData.patient_id}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Email: {reportData.patient_email}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Age: {reportData.patient_age}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Sex: {reportData.patient_sex}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Contact: {reportData.patient_contact}</Text>
+              </View>
 
-                <View style={pdfStyles.sectionHeader}>
-                  <Text style={pdfStyles.sectionHeader}>Recorder Details</Text>
-                  <View style={pdfStyles.sectionContent}>
-                    <Text>Recorder Name: {reportData.recorder_name}</Text>
-                  </View>
-                </View>
+              <Text style={pdfStyles.sectionHeader}>Prediction Details</Text>
+              <View style={pdfStyles.sectionContent}>
+                <Text>Prediction Type: {reportData.prediction_type}</Text>
+                <Text>Prediction: {reportData.prediction}</Text>
+                <Text>Has Pneumonia: {reportData.has_pneumonia ? 'Yes' : 'No'}</Text>
+              </View>
 
-                <View style={pdfStyles.sectionHeader}>
-                  <Text style={pdfStyles.sectionHeader}>Description</Text>
-                  <View style={pdfStyles.sectionContent}>
-                    <Text>{reportData.description}</Text>
-                  </View>
-                </View>
+              <Text style={pdfStyles.sectionHeader}>Recorder Details</Text>
+              <View style={pdfStyles.sectionContent}>
+                <Text>Recorder Name: {reportData.recorder_name}</Text>
+              </View>
 
-                <Text style={pdfStyles.footer}>Generated by Your Medical App</Text>
-              </Page>
-            </Document>
+              <Text style={pdfStyles.sectionHeader}>Description</Text>
+              <View style={pdfStyles.sectionContent}>
+                <Text>{reportData.description}</Text>
+              </View>
+
+              <Text style={pdfStyles.footer}>Generated by Your Medical App</Text>
+            </Page>
+          </Document>
                 }
                 fileName="medical_report.pdf" // Set the desired file name for the downloaded PDF
               >
@@ -197,41 +202,37 @@ const ReportForm = (props) => {
                   <Image src={logoImage} style={pdfStyles.logo} />
                 </View>
 
-                <View style={pdfStyles.reportInfo}>
-                  <Text style={pdfStyles.reportTitle}>Medical Report</Text>
-                  <Text>Patient Name: {reportData.patient_name}</Text>
-                  <Text>Patient ID: {reportData.patient_id}</Text>
-                  <Text>Patient Email: {reportData.patient_email}</Text>
-                  <Text>Patient Age: {reportData.patient_age}</Text>
-                  <Text>Patient Sex: {reportData.patient_sex}</Text>
-                  <Text>Patient Contact: {reportData.patient_contact}</Text>
-                </View>
+                <Text style={pdfStyles.reportTitle}>Medical Report</Text>
 
-                <View style={pdfStyles.sectionHeader}>
-                  <Text style={pdfStyles.sectionHeader}>Prediction Details</Text>
-                  <View style={pdfStyles.sectionContent}>
-                    <Text>Prediction Type: {reportData.prediction_type}</Text>
-                    <Text>Prediction: {reportData.prediction}</Text>
-                    <Text>Has Pneumonia: {reportData.has_pneumonia ? 'Yes' : 'No'}</Text>
-                  </View>
-                </View>
+              <Text style={pdfStyles.sectionHeader}>Patient Details</Text>
+              <View style={pdfStyles.sectionContent}>
+              <Text style={pdfStyles.patientInfo}>Patient Name: {reportData.patient_name}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient ID: {reportData.patient_id}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Email: {reportData.patient_email}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Age: {reportData.patient_age}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Sex: {reportData.patient_sex}</Text>
+              <Text style={pdfStyles.patientInfo}>Patient Contact: {reportData.patient_contact}</Text>
+              </View>
 
-                <View style={pdfStyles.sectionHeader}>
-                  <Text style={pdfStyles.sectionHeader}>Recorder Details</Text>
-                  <View style={pdfStyles.sectionContent}>
-                    <Text>Recorder Name: {reportData.recorder_name}</Text>
-                  </View>
-                </View>
+              <Text style={pdfStyles.sectionHeader}>Prediction Details</Text>
+              <View style={pdfStyles.sectionContent}>
+                <Text style={pdfStyles.patientInfo}>Prediction Type: {reportData.prediction_type}</Text>
+                <Text style={pdfStyles.patientInfo}>Prediction: {reportData.prediction}</Text>
+                <Text style={pdfStyles.patientInfo}>Has Pneumonia: {reportData.has_pneumonia ? 'Yes' : 'No'}</Text>
+              </View>
 
-                <View style={pdfStyles.sectionHeader}>
-                  <Text style={pdfStyles.sectionHeader}>Description</Text>
-                  <View style={pdfStyles.sectionContent}>
-                    <Text>{reportData.description}</Text>
-                  </View>
-                </View>
+              <Text style={pdfStyles.sectionHeader}>Recorder Details</Text>
+              <View style={pdfStyles.sectionContent}>
+                <Text style={pdfStyles.patientInfo}>Recorder Name: {reportData.recorder_name}</Text>
+              </View>
 
-                <Text style={pdfStyles.footer}>Generated by Your Medical App</Text>
-              </Page>
+              <Text style={pdfStyles.sectionHeader}>Description</Text>
+              <View style={pdfStyles.sectionContent}>
+                <Text style={pdfStyles.patientInfo}>{reportData.description}</Text>
+              </View>
+
+              <Text style={pdfStyles.footer}>Generated by Your Medical App</Text>
+            </Page>
             </Document>
         </PDFViewer>
       )}

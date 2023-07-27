@@ -7,7 +7,7 @@ import doctors from "../../Assets/doctors.jpg";
 const About = () => {
     return (
         <div className={styles.big_wrapper}>
-            <div className={styles.home_nav}>
+            <div>
                 <Navbar />
             </div>
 
@@ -20,10 +20,12 @@ const About = () => {
                             {/* <button onClick={myTry}>yes</button> */}
                         </div>
                         <p className={styles.text}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum 
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                        Diagnosing pneumonia using AI is our main priority.
+                        Welcome to MediAId, where innovation drives care.
+                        Expert team, pioneering precise assessments since 2023.
+                        Empowering healthcare in resource-constraint areas.
+                        Join us in revolutionizing global health with AI.
+                        Together, let's make a difference that matters.
                         </p>
                     </div>
                     <div className={styles.right}>
